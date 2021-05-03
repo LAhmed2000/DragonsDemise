@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Background/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Box/Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Camera/Camera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Background/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Boss/Boss.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/EnemyHealthUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/LoadingAreas/LoadSceneArea.tscn" type="PackedScene" id=9]
+[ext_resource path="res://fade_in/Fadein.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Main/Main.gd" type="Script" id=11]
+[ext_resource path="res://UI/AmmoUI.tscn" type="PackedScene" id=12]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+scene_to_load = "res://End Scenes/Win.tscn"
+game_over_scene = "res://End Scenes/GameOver.tscn"
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+
+[node name="TileMap" parent="." instance=ExtResource( 1 )]
+
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 33.7597, 85.3321 )
+
+[node name="Boxes" type="YSort" parent="YSort"]
+
+[node name="Box" parent="YSort/Boxes" instance=ExtResource( 3 )]
+position = Vector2( 227, 139 )
+scale = Vector2( 4.73962, 4.66012 )
+
+[node name="Box2" parent="YSort/Boxes" instance=ExtResource( 3 )]
+position = Vector2( 215, 35 )
+scale = Vector2( 4.37039, 4.37039 )
+
+[node name="Box3" parent="YSort/Boxes" instance=ExtResource( 3 )]
+position = Vector2( 247, 47 )
+scale = Vector2( 3.8716, 3.8716 )
+
+[node name="Box5" parent="YSort/Boxes" instance=ExtResource( 3 )]
+position = Vector2( 282, 150 )
+
+[node name="Box4" parent="YSort/Boxes" instance=ExtResource( 3 )]
+position = Vector2( 200, 161 )
+
+[node name="Boss" parent="." instance=ExtResource( 6 )]
+position = Vector2( 260.009, 82.2334 )
+
+[node name="Aim1" parent="Boss/Node2D" index="0"]
+position = Vector2( -34.9142, 10.7731 )
+
+[node name="Aim2" parent="Boss/Node2D" index="1"]
+position = Vector2( -22.0517, 16.6939 )
+
+[node name="Aim3" parent="Boss/Node2D" index="2"]
+position = Vector2( -12.456, 11.5898 )
+
+[node name="Aim9" parent="Boss/Node2D" index="3"]
+position = Vector2( -28.3809, 14.244 )
+
+[node name="Aim10" parent="Boss/Node2D" index="4"]
+position = Vector2( -45.1225, 3.42317 )
+
+[node name="Aim11" parent="Boss/Node2D" index="5"]
+position = Vector2( -12.8643, -8.41845 )
+
+[node name="Aim12" parent="Boss/Node2D" index="6"]
+position = Vector2( -40.6308, -1.68098 )
+
+[node name="Aim13" parent="Boss/Node2D" index="7"]
+position = Vector2( -41.4475, 7.30232 )
+
+[node name="Aim14" parent="Boss/Node2D" index="8"]
+position = Vector2( -36.5475, -4.74347 )
+
+[node name="Aim15" parent="Boss/Node2D" index="9"]
+position = Vector2( -33.485, -7.80595 )
+
+[node name="Aim16" parent="Boss/Node2D" index="10"]
+position = Vector2( -28.1767, -9.03095 )
+
+[node name="HealthUI" parent="." instance=ExtResource( 7 )]
+
+[node name="Life" parent="HealthUI" index="0"]
+margin_left = 0.108925
+margin_right = 16.1089
+
+[node name="EnemyHealthUI" parent="." instance=ExtResource( 8 )]
+margin_left = 288.0
+margin_right = 304.0
+
+[node name="Life" parent="EnemyHealthUI" index="0"]
+margin_left = 16.5161
+margin_top = 16.2408
+margin_right = 32.5161
+margin_bottom = 32.2408
+
+[node name="AmmoUi" parent="." instance=ExtResource( 12 )]
+margin_top = 161.0
+margin_bottom = 161.0
+
+[node name="LoadSceneArea" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" parent="LoadSceneArea" index="0"]
+position = Vector2( 318, 95 )
+
+[node name="Fadein" parent="." instance=ExtResource( 10 )]
+margin_right = 320.0
+margin_bottom = 180.0
+[connection signal="dead" from="YSort/Player" to="." method="_on_Player_dead"]
+[connection signal="dead" from="Boss" to="." method="_on_Boss_dead"]
+[connection signal="body_entered" from="LoadSceneArea" to="." method="_on_LoadSceneArea_body_entered"]
+[connection signal="fade_finished" from="Fadein" to="." method="_on_Fadein_fade_finished"]
+
+[editable path="Boss"]
+
+[editable path="HealthUI"]
+
+[editable path="EnemyHealthUI"]
+
+[editable path="LoadSceneArea"]

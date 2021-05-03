@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Background/Background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Background/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fade_in/Fadein.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Message/Message.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/LoadingAreas/LoadSceneArea.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World 1/LoadScene.gd" type="Script" id=8]
+[ext_resource path="res://Objects/Box/Box.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/AmmoUI.tscn" type="PackedScene" id=10]
+
+[node name="World2" type="Node2D"]
+script = ExtResource( 8 )
+scene_to_load = "res://World 3/World3.tscn"
+
+[node name="Background" parent="." instance=ExtResource( 1 )]
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 0, 0, 65537, 1, 0, 65537, 2, 0, 65537, 3, 0, 65537, 4, 0, 65537, 5, 0, 65537, 6, 0, 65537, 7, 0, 65537, 8, 0, 65537, 9, 0, 65537, 10, 0, 65537, 11, 0, 65537, 12, 0, 65537, 13, 0, 65537, 14, 0, 65537, 15, 0, 65537, 16, 0, 65537, 17, 0, 65537, 18, 0, 65537, 19, 0, 65537, 65536, 0, 65537, 65555, 0, 65537, 131072, 0, 65537, 131091, 0, 65537, 196608, 0, 65537, 196627, 0, 65537, 262144, 0, 65537, 262163, 0, 65537, 327680, 0, 65537, 327699, 0, 65537, 393216, 0, 65537, 393235, 0, 65537, 458752, 0, 65537, 458771, 0, 65537, 524288, 0, 65537, 524296, 0, 65537, 524299, 0, 65537, 524307, 0, 65537, 589824, 0, 65537, 589832, 0, 65537, 589835, 0, 65537, 589843, 0, 65537, 655360, 0, 65537, 655368, 0, 65537, 655371, 0, 65537, 655379, 0, 65537, 720896, 0, 65537, 720897, 0, 65537, 720898, 0, 65537, 720899, 0, 65537, 720900, 0, 65537, 720901, 0, 65537, 720902, 0, 65537, 720903, 0, 65537, 720904, 0, 65537, 720907, 0, 65537, 720908, 0, 65537, 720909, 0, 65537, 720910, 0, 65537, 720911, 0, 65537, 720912, 0, 65537, 720913, 0, 65537, 720914, 0, 65537, 720915, 0, 65537 )
+
+[node name="Control" parent="." instance=ExtResource( 6 )]
+margin_left = 21.0
+margin_top = 19.0
+margin_right = 146.0
+margin_bottom = 59.0
+
+[node name="ColorRect" parent="Control" index="0"]
+margin_right = 125.0
+
+[node name="Label" parent="Control/ColorRect" index="0"]
+text = "Press the left mouse button
+ to fire, press the right 
+mouse button to recharge!"
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 161, 95 )
+
+[node name="Boxes" type="YSort" parent="YSort"]
+
+[node name="Box" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 59, 122 )
+scale = Vector2( 3.62398, 3.62398 )
+
+[node name="Box5" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 34, 92 )
+
+[node name="Box6" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 283, 88 )
+
+[node name="Box2" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 81, 155 )
+scale = Vector2( 4.70725, 4.70725 )
+
+[node name="Box4" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 235, 158 )
+scale = Vector2( 4.70725, 4.70725 )
+
+[node name="Box3" parent="YSort/Boxes" instance=ExtResource( 9 )]
+position = Vector2( 261, 121 )
+scale = Vector2( 3.5803, 3.5803 )
+
+[node name="HealthUI" parent="." instance=ExtResource( 4 )]
+
+[node name="AmmoUi" parent="." instance=ExtResource( 10 )]
+margin_left = 1.0
+margin_top = 160.0
+margin_right = 1.0
+margin_bottom = 160.0
+
+[node name="LoadSceneArea" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" parent="LoadSceneArea" index="0"]
+position = Vector2( 159, 186 )
+rotation = 1.5708
+
+[node name="Fadein" parent="." instance=ExtResource( 3 )]
+margin_right = 320.0
+margin_bottom = 180.0
+[connection signal="body_entered" from="LoadSceneArea" to="." method="_on_LoadSceneArea_body_entered"]
+[connection signal="fade_finished" from="Fadein" to="." method="_on_Fadein_fade_finished"]
+
+[editable path="Control"]
+
+[editable path="LoadSceneArea"]

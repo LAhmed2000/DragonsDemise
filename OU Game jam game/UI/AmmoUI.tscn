@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/AmmoUI.gd" type="Script" id=1]
+[ext_resource path="res://Objects/PlayerProjectile/projectile_placeholder.png" type="Texture" id=2]
+
+[node name="AmmoUi" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.279388
+margin_bottom = -0.279388
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo" type="TextureRect" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_rotation = 180.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
